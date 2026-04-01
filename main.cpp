@@ -5,41 +5,6 @@
 
 using namespace std;
 
-int X = 100;
-int Y = 100;
-bool bIsRunning = true;
-
-void Input()
-{
-	SDL_Event MyEvent;
-	while(SDL_PollEvent(&MyEvent))
-	{
-		if (MyEvent.type == SDL_KEYDOWN)
-		{
-			if (MyEvent.key.keysym.sym == SDLK_w)
-			{
-				Y -= 10;
-			}
-			if (MyEvent.key.keysym.sym == SDLK_s)
-			{
-				Y += 10;
-			}
-			if (MyEvent.key.keysym.sym == SDLK_a)
-			{
-				X -= 10;
-			}
-			if (MyEvent.key.keysym.sym == SDLK_d)
-			{
-				X += 10;
-			}
-			if (MyEvent.key.keysym.sym == SDLK_ESCAPE)
-			{
-				bIsRunning = false;
-			}
-		}
-	}
-}
-
 int SDL_main(int argc, char* argv[])
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
@@ -48,9 +13,41 @@ int SDL_main(int argc, char* argv[])
 	SDL_Window* MyWindow = SDL_CreateWindow("Renderer", 100, 100, 1024, 768, SDL_WINDOW_SHOWN);
 	SDL_Renderer* MyRenderer = SDL_CreateRenderer(MyWindow, -1, 0);
 
+	int X = 100;
+	int Y = 100;
+	bool bIsRunning = true;
+
 	while (bIsRunning)
 	{
-		Input();
+		// Input
+		SDL_Event MyEvent;
+		while (SDL_PollEvent(&MyEvent))
+		{
+			// Tick
+			if (MyEvent.type == SDL_KEYDOWN)
+			{
+				if (MyEvent.key.keysym.sym == SDLK_w)
+				{
+					Y -= 10;
+				}
+				if (MyEvent.key.keysym.sym == SDLK_s)
+				{
+					Y += 10;
+				}
+				if (MyEvent.key.keysym.sym == SDLK_a)
+				{
+					X -= 10;
+				}
+				if (MyEvent.key.keysym.sym == SDLK_d)
+				{
+					X += 10;
+				}
+				if (MyEvent.key.keysym.sym == SDLK_ESCAPE)
+				{
+					bIsRunning = false;
+				}
+			}
+		}
 
 		// ¹è°æ
 		SDL_SetRenderDrawColor(MyRenderer, 255, 255, 255, 255);
